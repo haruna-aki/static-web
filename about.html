@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .main-section {
+        width: 100%;
+        height: 100vh;
+        background-color: #dadada;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transition: all 0.5s ease-in-out;
+      }
+      .main-section h1 {
+        margin-bottom: 20px;
+      }
+      .container {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: #8b4fe6;
+        transition: all 0.5s ease-in;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9;
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+      }
+      .container:hover {
+        transform: rotate(45deg);
+        background: #6408ed;
+        border-radius: 100%;
+      }
+      .main-container h1 {
+        color: white;
+        opacity: 0;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transition: all 0.3s ease-in;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        pointer-events: none;
+      }
+      .main-container:hover > h1 {
+        top: 50%;
+        opacity: 1;
+        border-radius: 100%;
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="main-section">
+      <h1>THIS IS ABOUT PAGE</h1>
+      <h3>HOVER ME</h3>
+      <div
+        class="main-container"
+        style="position: relative; width: 500px; height: 500px">
+        <h1>ABOUT ME</h1>
+        <div class="container"></div>
+      </div>
+    </section>
+  </body>
+
+  <script>
+    const mainContainer = document.querySelector(".main-container");
+    const mainSection = document.querySelector(".main-section");
+
+    mainContainer.addEventListener("mouseenter", () => {
+      mainSection.style.backgroundColor = "#2c1f40";
+    });
+
+    mainContainer.addEventListener("mouseleave", () => {
+      mainSection.style.backgroundColor = "#dadada"; // or original color
+    });
+  </script>
+</html>
