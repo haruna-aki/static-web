@@ -1,12 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Manrope';
+            font-size: 22px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form,
+        table {
+            max-width: 700px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            /* alligned 'yung fields sa container -iwi*/
+            resize: none;
+            /* para hindi maging-resizable comment field -iwi*/
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .no-kit {
+            background-color: #ffcccc;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            form,
+            table {
+                width: 95%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    
+
+    <h1>Information</h1>
+
+    <form id="surveyForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="age">Age</label>
+        <input type="age" id="age" name="age" required />
+
+        <label>Employed:</label>
+        <input type="radio" name="kit" value="Yes" required /> Yes
+        <input type="radio" name="kit" value="No" /> No
+
+        <label>Perma. Home:</label>
+        <input type="checkbox" name="address" value="Urban" /> Urban
+        <input type="checkbox" name="address" value="Rural" /> Rural
+
+        <label>Reason:</label>
+        <textarea name="experience" rows="3"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Results will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('surveyForm');
+        const table = document.getElementById('resultsTable').querySelector('tbody');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = form.name.value;
+            const age = form.age.value;
+            const kit = form.kit.value;
+            const experience = form.experience.value;
+
+            const planInputs = form.querySelectorAll('input[name="plan"]:checked');
+            const plans = Array.from(planInputs).map(input => input.value).join(', ');
+
+            const row = document.createElement('tr');
+            if (kit === "No") row.classList.add('no-kit');
+
+            row.innerHTML = `
+      <td>${name}</td>
+      <td>${age}</td>
+      <td>${kit}</td>
+      <td>${plans || "None"}</td>
+      <td>${experience || "N/A"}</td>
+    `;
+
+            table.appendChild(row);
+            form.reset();
+        });
+    </script>
+
 </body>
+
 </html>
